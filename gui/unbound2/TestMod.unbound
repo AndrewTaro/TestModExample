@@ -1,0 +1,24 @@
+(def element TestModElementUb2() layout=true
+    (scope
+        (var modDataEntityWatcher:gfx = "$datahub.getPrimWatcher(CC.mods_DataComponent, 'superUniqueTestModEntityKey')")
+        (var modDataEntity:gfx = "modDataEntityWatcher.entity" (event "modDataEntityWatcher.event"))
+        (var modDataComponent:gfx = "modDataEntity ? modDataEntity.mods_DataComponent : null" )
+        (var modData:dict = "modDataComponent ? modDataComponent.data : null" (event "modDataComponent.evDataChanged"))
+        (var keyName:str = "modData && 'keyName' in modData ? modData.keyName : ''")
+        (var isShiftDown:bool = "modData && 'isShiftDown' in modData ? modData.isShiftDown: false")
+    )
+
+    (block
+        (style
+            (position = "absolute")
+            (top = 100px)
+            (left = 100px)
+        )
+        (tf
+            (bind text "'key name: ' + keyName")
+        )
+        (tf
+            (bind text "'is shift down:' + isShiftDown")
+        )
+    )
+)
